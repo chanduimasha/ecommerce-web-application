@@ -11,21 +11,7 @@ const CartModel = require("./model/Cart");
 dotenv.config();
 const app = express();
 app.use(express.json());
-
-const corsOptions = {
-  origin: "https://ecommerce-frontend-mauve-mu.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-app.use(
-  cors({
-    origin: ["https://ecommerce-frontend-mauve-mu.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 const router = express.Router();
 
