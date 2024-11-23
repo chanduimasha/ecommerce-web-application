@@ -41,7 +41,7 @@ const Page = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const [orderPlaced, setOrderPlaced] = useState(false);
+  // const [orderPlaced, setOrderPlaced] = useState(false);
 
   const [shippingDetails, setShippingDetails] = useState<ShippingDetails>({
     fullName: "",
@@ -113,7 +113,7 @@ const Page = () => {
         method: "DELETE",
       });
 
-      setOrderPlaced(true);
+      // setOrderPlaced(true);
       setCurrentStep(3);
     } catch (error) {
       console.error("Error placing order:", error);

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ShoppingCart, Search } from "lucide-react";
 import CategoryModel from "@/components/CategoryModel";
