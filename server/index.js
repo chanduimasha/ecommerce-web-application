@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://ecommerce-server-jade.vercel.app"],
+    origin: ["https://ecommerce-frontend-mauve-mu.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })
