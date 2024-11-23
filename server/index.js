@@ -11,7 +11,13 @@ const CartModel = require("./model/Cart");
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://deploy-mern-lwg.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 const router = express.Router();
 
