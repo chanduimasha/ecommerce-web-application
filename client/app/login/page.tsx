@@ -15,7 +15,7 @@ const Page = () => {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/login", { email, password })
+      .post("https://ecommerce-server-jade.vercel.app/login", { email, password })
       .then((result) => {
         if (result.data === "Success") {
           router.push("/home");
