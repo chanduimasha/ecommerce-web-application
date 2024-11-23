@@ -14,8 +14,8 @@ interface Category {
 
 const Page = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [image, setImage] = useState("");
-  const [category, setCategory] = useState("");
+  // const [image, setImage] = useState("");
+  // const [category, setCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,25 +29,25 @@ const Page = () => {
     setCategories(data);
   };
 
-  const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const response = await fetch("https://ecommerce-server-jade.vercel.app/api/categories", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ category, image }),
-    });
+  // const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const response = await fetch("https://ecommerce-server-jade.vercel.app/api/categories", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ category, image }),
+  //   });
 
-    if (response.ok) {
-      // Optionally clear the input fields or fetch the updated categories
-      fetchCategories();
-      setImage("");
-      setCategory("");
-    } else {
-      console.error("Failed to create category. Status:", response.status);
-    }
-  };
+  //   if (response.ok) {
+  //     // Optionally clear the input fields or fetch the updated categories
+  //     fetchCategories();
+  //     setImage("");
+  //     setCategory("");
+  //   } else {
+  //     console.error("Failed to create category. Status:", response.status);
+  //   }
+  // };
 
   useEffect(() => {
     fetchCategories();
