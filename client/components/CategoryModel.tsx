@@ -10,8 +10,8 @@ interface CategoryModalProps {
 }
 
 const CategoryModel = ({ isOpen, onClose, onCategoryCreated }: CategoryModalProps) => {
-  // const [name, setName] = useState("");
-  // const [price, setPrice] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
 

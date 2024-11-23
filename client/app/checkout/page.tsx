@@ -41,7 +41,7 @@ const Page = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  // const [orderPlaced, setOrderPlaced] = useState(false);
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const [shippingDetails, setShippingDetails] = useState<ShippingDetails>({
     fullName: "",
@@ -65,7 +65,7 @@ const Page = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch("https://ecommerce-server-jade.vercel.app/api/cart");
+      const response = await fetch("http://localhost:3001/api/cart");
       if (!response.ok) throw new Error("Failed to fetch cart items");
       const data = await response.json();
       setCartItems(data);
@@ -98,7 +98,7 @@ const Page = () => {
         totalAmount: calculateTotal(),
       };
 
-      const response = await fetch("https://ecommerce-server-jade.vercel.app/api/orders", {
+      const response = await fetch("http://localhost:3001/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,11 +109,11 @@ const Page = () => {
       if (!response.ok) throw new Error("Failed to place order");
 
       // Clear cart after successful order
-      await fetch("https://ecommerce-server-jade.vercel.app/api/cart/clear", {
+      await fetch("http://localhost:3001/api/cart/clear", {
         method: "DELETE",
       });
 
-      // setOrderPlaced(true);
+      setOrderPlaced(true);
       setCurrentStep(3);
     } catch (error) {
       console.error("Error placing order:", error);

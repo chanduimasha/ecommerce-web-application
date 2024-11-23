@@ -11,22 +11,7 @@ const CartModel = require("./model/Cart");
 dotenv.config();
 const app = express();
 app.use(express.json());
-
-const corsOptions = {
-  origin: "https://ecommerce-frontend-mauve-mu.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-};
-
-app.use(cors({ origin: 'https://ecommerce-frontend-mauve-mu.vercel.app' }));
-
-// Handle preflight requests for all routes
-app.options('*', (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://ecommerce-frontend-mauve-mu.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.sendStatus(200); // Respond with HTTP OK status
-});
+app.use(cors());
 
 const router = express.Router();
 

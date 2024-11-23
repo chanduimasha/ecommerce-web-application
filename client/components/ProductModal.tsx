@@ -17,7 +17,7 @@ const ProductModal = ({ isOpen, onClose, onProductCreated }: ProductModalProps) 
 
   const handleCreateProducts = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("https://ecommerce-server-jade.vercel.app/api/products", {
+    const response = await fetch("http://localhost:3001/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
