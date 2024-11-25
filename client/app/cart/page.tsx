@@ -21,7 +21,7 @@
 
 //   const fetchCartItems = async () => {
 //     try {
-//       const response = await fetch("https://ecommerce-server-wine.vercel.app/api/cart");
+//       const response = await fetch("http://localhost:3001/api/cart");
 //       if (!response.ok) {
 //         throw new Error("Failed to fetch cart items");
 //       }
@@ -42,7 +42,7 @@
 
 //     try {
 //       const response = await fetch(
-//         `https://ecommerce-server-wine.vercel.app/api/cart/${item.productId}`,
+//         `http://localhost:3001/api/cart/${item.productId}`,
 //         {
 //           method: "PUT",
 //           headers: {
@@ -76,7 +76,7 @@
 
 //   const handleRemoveFromCart = async (itemId: string) => {
 //     try {
-//       const response = await fetch(`https://ecommerce-server-wine.vercel.app/api/cart/${itemId}`, {
+//       const response = await fetch(`http://localhost:3001/api/cart/${itemId}`, {
 //         method: "DELETE",
 //       });
 
@@ -247,7 +247,7 @@ const Page = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch("https://ecommerce-server-wine.vercel.app/api/cart");
+      const response = await fetch("http://localhost:3001/api/cart");
       if (!response.ok) {
         throw new Error("Failed to fetch cart items");
       }
@@ -268,7 +268,7 @@ const Page = () => {
 
     try {
       const response = await fetch(
-        `https://ecommerce-server-wine.vercel.app/api/cart/${item.productId}`,
+        `http://localhost:3001/api/cart/${item.productId}`,
         {
           method: "PUT",
           headers: {
@@ -300,7 +300,7 @@ const Page = () => {
 
   const handleRemoveFromCart = async (itemId: string) => {
     try {
-      const response = await fetch(`https://ecommerce-server-wine.vercel.app/api/cart/${itemId}`, {
+      const response = await fetch(`http://localhost:3001/api/cart/${itemId}`, {
         method: "DELETE",
       });
 

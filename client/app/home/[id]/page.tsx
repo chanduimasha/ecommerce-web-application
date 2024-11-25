@@ -24,7 +24,7 @@ const Page = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `https://ecommerce-server-wine.vercel.app/api/products/${params.id}`
+          `http://localhost:3001/api/products/${params.id}`
         );
         if (!response.ok) {
           throw new Error("Product not found");
@@ -48,7 +48,7 @@ const Page = () => {
     if (!product) return;
 
     try {
-      const response = await fetch("https://ecommerce-server-wine.vercel.app/api/cart", {
+      const response = await fetch("http://localhost:3001/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
