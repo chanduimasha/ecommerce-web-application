@@ -15,7 +15,7 @@ const Page = () => {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("https://ecommerce-api-beta-one.vercel.app/login", { email, password })
+      .post("https://ecommerce-server-wine.vercel.app/login", { email, password })
       .then((result) => {
         if (result.data === "Success") {
           router.push("/home");
