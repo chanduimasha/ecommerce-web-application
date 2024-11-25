@@ -22,7 +22,7 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchCategories = async () => {
-    const response = await fetch("http://localhost:3001/api/categories");
+    const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/categories");
     if (!response.ok) {
       console.error("Failed to fetch categories. Status:", response.status);
       return;
@@ -33,7 +33,7 @@ const Page = () => {
 
   const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/api/categories", {
+    const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/categories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

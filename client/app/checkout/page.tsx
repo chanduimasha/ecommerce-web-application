@@ -65,7 +65,7 @@ const Page = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/cart");
+      const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/cart");
       if (!response.ok) throw new Error("Failed to fetch cart items");
       const data = await response.json();
       setCartItems(data);
@@ -98,7 +98,7 @@ const Page = () => {
         totalAmount: calculateTotal(),
       };
 
-      const response = await fetch("http://localhost:3001/api/orders", {
+      const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const Page = () => {
       if (!response.ok) throw new Error("Failed to place order");
 
       // Clear cart after successful order
-      await fetch("http://localhost:3001/api/cart/clear", {
+      await fetch("https://ecommerce-api-beta-one.vercel.app/api/cart/clear", {
         method: "DELETE",
       });
 
