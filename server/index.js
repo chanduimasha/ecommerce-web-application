@@ -11,7 +11,8 @@ const CartModel = require("./model/Cart");
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({ origin: "https://ecommerce-frontend-tawny-rho.vercel.app" }));
 
 const router = express.Router();
 
