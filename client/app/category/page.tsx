@@ -16,8 +16,8 @@ interface Category {
 
 const Page = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [image, setImage] = useState("");
-  const [category, setCategory] = useState("");
+  // const [image, setImage] = useState("");
+  // const [category, setCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
