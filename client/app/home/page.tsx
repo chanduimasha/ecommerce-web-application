@@ -24,7 +24,7 @@ const Page = () => {
   const router = useRouter();
 
   const fetchProducts = async () => {
-    const response = await fetch("http://localhost:3001/api/products");
+    const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/products");
     if (!response.ok) {
       console.error("Failed to fetch products. Status:", response.status);
       return;
@@ -35,7 +35,7 @@ const Page = () => {
 
   const handleAddToCart = async (product: Product) => {
     try {
-      const response = await fetch("http://localhost:3001/api/cart", {
+      const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const Page = () => {
   const handleRemove = async (itemId: number) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/products/${itemId}`,
+        `https://ecommerce-api-beta-one.vercel.app/api/products/${itemId}`,
         {
           method: "DELETE",
         }
