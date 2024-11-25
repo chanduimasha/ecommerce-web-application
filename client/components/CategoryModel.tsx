@@ -17,7 +17,7 @@ const CategoryModel = ({ isOpen, onClose, onCategoryCreated }: CategoryModalProp
 
   const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("https://ecommerce-server-wine.vercel.app/api/categories", {
+    const response = await fetch("http://localhost:3001/api/categories", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
