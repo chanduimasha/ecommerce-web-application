@@ -17,7 +17,7 @@ const Page = () => {
   const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("https://ecommerce-api-beta-one.vercel.app/signup", {
+      .post("https://ecommerce-server-wine.vercel.app/signup", {
         firstName,
         lastName,
         email,
