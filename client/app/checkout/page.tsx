@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { CreditCard, ShoppingBag, Truck, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from 'axios';
+import ApiClient from '@/components/ApiClient';
 import {
   Card,
   CardContent,
@@ -65,10 +67,8 @@ const Page = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/cart");
-      if (!response.ok) throw new Error("Failed to fetch cart items");
-      const data = await response.json();
-      setCartItems(data);
+      const response = await ApiClient.get("/api/cart");
+      setCartItems(response.data);
     } catch (error) {
       console.error("Error fetching cart items:", error);
     }
@@ -89,7 +89,7 @@ const Page = () => {
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     try {
       const orderData = {
         items: cartItems,
@@ -97,22 +97,18 @@ const Page = () => {
         paymentDetails,
         totalAmount: calculateTotal(),
       };
-
-      const response = await fetch("http://localhost:3001/api/orders", {
-        method: "POST",
+  
+      const response = await ApiClient.post("/api/orders", orderData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(orderData),
       });
-
-      if (!response.ok) throw new Error("Failed to place order");
-
+  
+      if (response.status !== 201) throw new Error("Failed to place order");
+  
       // Clear cart after successful order
-      await fetch("http://localhost:3001/api/cart/clear", {
-        method: "DELETE",
-      });
-
+      await ApiClient.delete("/api/cart/clear");
+  
       // setOrderPlaced(true);
       setCurrentStep(3);
     } catch (error) {

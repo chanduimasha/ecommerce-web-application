@@ -6,6 +6,9 @@ import Head from "next/head";
 // import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ShoppingCart, Search } from "lucide-react";
+import axios from 'axios';
+import ApiClient from '@/components/ApiClient';
+
 import CategoryModel from "@/components/CategoryModel";
 
 interface Category {
@@ -22,13 +25,12 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchCategories = async () => {
-    const response = await fetch("http://localhost:3001/api/categories");
-    if (!response.ok) {
-      console.error("Failed to fetch categories. Status:", response.status);
-      return;
+    try {
+      const response = await ApiClient.get("/api/categories");
+      setCategories(response.data); // Axios automatically parses JSON
+    } catch (error) {
+      console.error("Failed to fetch categories:", error);
     }
-    const data = await response.json();
-    setCategories(data);
   };
 
   // const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {

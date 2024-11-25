@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { ShoppingCart, Search, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductModal from "@/components/ProductModal";
+import axios from 'axios';
+import ApiClient from '@/components/ApiClient';
 
 interface Product {
   _id: number;
@@ -24,35 +26,33 @@ const Page = () => {
   const router = useRouter();
 
   const fetchProducts = async () => {
-    const response = await fetch("http://localhost:3001/api/products");
-    if (!response.ok) {
-      console.error("Failed to fetch products. Status:", response.status);
-      return;
+    try {
+      const response = await ApiClient.get("/api/products");
+      setFeaturedProducts(response.data);
+    } catch (error) {
+      console.error("Failed to fetch products. Error:", error);
     }
-    const data = await response.json();
-    setFeaturedProducts(data);
   };
 
   const handleAddToCart = async (product: Product) => {
     try {
-      const response = await fetch("http://localhost:3001/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await ApiClient.post(
+        "/api/cart",
+        {
           productId: product._id,
           name: product.name,
           price: product.price,
           image: product.image,
           quantity: 1,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add item to cart");
-      }
-      console.log("Item added to cart successfully");
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      console.log("Item added to cart successfully", response.data);
     } catch (error) {
       console.error("Error adding item to cart:", error);
     }
@@ -60,17 +60,14 @@ const Page = () => {
 
   const handleRemove = async (itemId: number) => {
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/products/${itemId}`,
-        {
-          method: "DELETE",
-        }
+      const response = await ApiClient.delete(
+        `/api/products/${itemId}`
       );
-
-      if (!response.ok) {
+  
+      if (response.status !== 200) {
         throw new Error("Failed to remove product");
       }
-
+  
       setFeaturedProducts((prevItems) =>
         prevItems.filter((product) => product._id !== itemId)
       );

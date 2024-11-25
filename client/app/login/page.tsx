@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import ApiClient from '@/components/ApiClient';
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,8 @@ const Page = () => {
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/login", { email, password })
+    ApiClient
+      .post("/login", { email, password })
       .then((result) => {
         if (result.data === "Success") {
           router.push("/home");

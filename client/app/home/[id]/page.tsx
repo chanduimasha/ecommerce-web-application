@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import axios from 'axios';
+import ApiClient from '@/components/ApiClient';
 
 interface Product {
   _id: number;
@@ -23,14 +25,8 @@ const Page = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3001/api/products/${params.id}`
-        );
-        if (!response.ok) {
-          throw new Error("Product not found");
-        }
-        const data = await response.json();
-        setProduct(data);
+        const response = await ApiClient.get(`/api/products/${params.id}`);
+        setProduct(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -46,27 +42,25 @@ const Page = () => {
 
   const handleAddToCart = async () => {
     if (!product) return;
-
+  
     try {
-      const response = await fetch("http://localhost:3001/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const response = await ApiClient.post(
+        "/api/cart", 
+        {
           productId: product._id,
           name: product.name,
           price: product.price,
           image: product.image,
           quantity: 1,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add item to cart");
-      }
-
-      console.log("Item added to cart successfully");
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      console.log("Item added to cart successfully", response.data);
     } catch (error) {
       console.error("Error adding item to cart:", error);
     }

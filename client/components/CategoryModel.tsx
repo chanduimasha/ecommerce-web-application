@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import axios from 'axios';
+import ApiClient from './ApiClient';
 
 interface CategoryModalProps {
   isOpen: boolean;
@@ -17,22 +19,29 @@ const CategoryModel = ({ isOpen, onClose, onCategoryCreated }: CategoryModalProp
 
   const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/api/categories", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ category, image }),
-    });
-
-    if (response.ok) {
-      // Optionally clear the input fields or fetch the updated categories
-      setImage("");
-      setCategory("");
-      onCategoryCreated();
-      onClose();
-    } else {
-      console.error("Failed to create category. Status:", response.status);
+  
+    try {
+      const response = await ApiClient.post(
+        "/api/categories",
+        { category, image },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      if (response.status === 201) {
+        // Optionally clear the input fields or fetch the updated categories
+        setImage("");
+        setCategory("");
+        onCategoryCreated();
+        onClose();
+      } else {
+        console.error("Failed to create category. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error occurred while creating category:", error);
     }
   };
 

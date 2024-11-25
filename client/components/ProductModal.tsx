@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import axios from 'axios';
+import ApiClient from '@/components/ApiClient';
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -17,23 +19,27 @@ const ProductModal = ({ isOpen, onClose, onProductCreated }: ProductModalProps) 
 
   const handleCreateProducts = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/api/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, price, image, category }),
-    });
-
-    if (response.ok) {
-      setName("");
-      setPrice("");
-      setImage("");
-      setCategory("");
-      onProductCreated();
-      onClose();
-    } else {
-      console.error("Failed to create products. Status:", response.status);
+    
+    try {
+      const response = await ApiClient.post("/api/products", {
+        name,
+        price,
+        image,
+        category
+      });
+      
+      if (response.status === 201) {
+        setName("");
+        setPrice("");
+        setImage("");
+        setCategory("");
+        onProductCreated();
+        onClose();
+      } else {
+        console.error("Failed to create product. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error occurred while creating product:", error);
     }
   };
 

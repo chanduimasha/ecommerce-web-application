@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
+import ApiClient from '@/components/ApiClient';
 
 const Page = () => {
   const [firstName, setFirstName] = useState("");
@@ -16,8 +17,8 @@ const Page = () => {
 
   const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/signup", {
+    ApiClient
+      .post("/signup", {
         firstName,
         lastName,
         email,
