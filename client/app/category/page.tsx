@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ShoppingCart, Search } from "lucide-react";
 import CategoryModel from "@/components/CategoryModel";
@@ -31,25 +31,25 @@ const Page = () => {
     setCategories(data);
   };
 
-  const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/categories", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ category, image }),
-    });
+  // const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   const response = await fetch("https://ecommerce-api-beta-one.vercel.app/api/categories", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ category, image }),
+  //   });
 
-    if (response.ok) {
-      // Optionally clear the input fields or fetch the updated categories
-      fetchCategories();
-      setImage("");
-      setCategory("");
-    } else {
-      console.error("Failed to create category. Status:", response.status);
-    }
-  };
+  //   if (response.ok) {
+  //     // Optionally clear the input fields or fetch the updated categories
+  //     fetchCategories();
+  //     setImage("");
+  //     setCategory("");
+  //   } else {
+  //     console.error("Failed to create category. Status:", response.status);
+  //   }
+  // };
 
   useEffect(() => {
     fetchCategories();
